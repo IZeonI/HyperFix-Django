@@ -1,0 +1,257 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuente general y fondo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background-color: #1e293b;
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+}
+
+header img{
+    height: 100px;
+    width: auto;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+header nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-right: 1.5rem;
+    font-weight: 500;
+}
+
+header nav a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-center {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.hc-input {
+    width: 100%;
+    max-width: 800px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 0 10px;
+    gap: 8px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+.hc-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.hc-input:focus-within {
+    outline: 2px solid black;
+}
+
+.header-right {
+    width: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.header-right button {
+    all: unset; /* Borra todos los estilos por defecto */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.header-right button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* efecto de hover suave */
+}
+
+/* Nav secundario */
+.secondary-nav {
+    background-color: #FFA500;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;  
+    align-items: center;
+    padding: 12px 0;
+    gap: 2rem; /* Opcional si usas space-around */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    border-radius: 0 8px 8px 0;
+}
+
+
+
+.nav-button {
+    background: #333;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s, color 0.3s;
+}
+
+.nav-button:hover {
+    background: white;
+    color: #333;
+}
+
+/* Main */
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* footer */
+footer {
+    margin-top: 50px;
+    background-color: #1a1a1a;
+    color: #ccc;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-top: 30px;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #fff;
+}
+
+/* Estilo específico para el mapa en el footer */
+.footer-section.mapa iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header, main, footer {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    header nav a {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Componentes{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/cards.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <h1>Catálogo de Componentes</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for componente in componentes %}
+            <div class="card">
+                <img src="{{ componente.imagen_url }}" alt="{{ componente.modelo }}">
+                <h3>{{ componente.modelo }}</h3>
+                <p><strong>Precio:</strong> ${{ componente.precio }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

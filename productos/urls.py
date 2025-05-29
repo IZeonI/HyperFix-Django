@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('componentes/', views.lista_componentes, name='lista_componentes'),
+    path('<int:id>/', views.detalle_producto, name='detalle_producto'),
 ]

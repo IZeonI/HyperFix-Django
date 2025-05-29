@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{{ componente.marca }} {{ componente.modelo }}{% endblock %}
+
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/product_details.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="detalle-producto-card">
+    <img src="{{ componente.imagen_url }}" alt="{{ componente.modelo }}">
+    
+    <div class="detalle-info">
+        <h1>{{ componente.marca }} {{ componente.modelo }}</h1>
+        <p><strong>Stock:</strong> {{ componente.stock }}</p>
+        <p><strong>Precio:</strong> ${{ componente.precio }}</p>
+        
+        <div class="cantidad-control" data-stock="{{ componente.stock }}">
+            <button type="button" id="btn-restar" class="cantidad-btn" onclick="cambiarCantidad(-1)">-</button>
+            <input type="number" id="cantidad" value="1" min="1" max="{{ componente.stock }}" readonly>
+            <button type="button" id="btn-sumar" class="cantidad-btn" onclick="cambiarCantidad(1)">+</button>
+        </div>
+
+        <button class="agregar-carrito-btn">Agregar al carrito</button>
+    </div>
+</div>
+
+<script>
+    function cambiarCantidad(cambio) {
+        const input = document.getElementById("cantidad");
+        const contenedor = input.closest(".cantidad-control");
+        const stock = parseInt(contenedor.dataset.stock);
+        const btnSumar = document.getElementById("btn-sumar");
+        const btnRestar = document.getElementById("btn-restar");
+
+        let valor = parseInt(input.value) || 1;
+        valor = Math.max(1, Math.min(stock, valor + cambio));
+        input.value = valor;
+
+        btnRestar.disabled = valor <= 1;
+        btnSumar.disabled = valor >= stock;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => cambiarCantidad(0));
+</script>
+{% endblock %}
+

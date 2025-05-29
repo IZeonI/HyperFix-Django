@@ -13,9 +13,12 @@
     <div style="display: flex; flex-wrap: wrap;">
         {% for componente in componentes %}
             <div class="card">
-                <img src="{{ componente.imagen_url }}" alt="{{ componente.modelo }}">
-                <h3>{{ componente.modelo }}</h3>
-                <p><strong>Precio:</strong> ${{ componente.precio }}</p>
+                <a href="{% url 'detalle_producto' componente.id %}" class="card-link">
+                    <img src="{{ componente.imagen_url }}" alt="{{ componente.modelo }}">
+                    <h3>{{ componente.marca }} {{ componente.modelo }}</h3>
+                    <p><strong>Precio:</strong> ${{ componente.precio }}</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </a>
             </div>
         {% endfor %}
     </div>

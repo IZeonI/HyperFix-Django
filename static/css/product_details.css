@@ -1,0 +1,89 @@
+.detalle-producto-card {
+    display: flex;
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #fff7ed; 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 20px;
+    gap: 20px;
+}
+
+.detalle-producto-card img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.detalle-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.detalle-info h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.cantidad-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.cantidad-control input {
+    width: 60px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 4px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.cantidad-btn {
+    padding: 6px 12px;
+    font-size: 1.2rem;
+    background-color: #f97316; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cantidad-btn:disabled {
+    background-color: #ccc;    
+    color: #666;              
+    cursor: not-allowed;     
+    opacity: 0.6;             
+}
+
+.agregar-carrito-btn {
+    background-color: #ea580c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.agregar-carrito-btn:hover {
+    background-color: #c2410c;
+}
+
+/* Quita las flechas del input */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

@@ -5,6 +5,12 @@
 
 {% block head_extra %}
 <link rel="stylesheet" href="{% static 'css/product_details.css' %}">
+<script src="{% static 'js/detalle_producto.js' %}" defer></script>
+<script>
+  const CARRUSEL_URL = "{% url 'carrusel_componentes' %}";
+</script>
+<link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+<script src="{% static 'js/carousel.js' %}"></script>
 {% endblock %}
 
 {% block contenido %}
@@ -22,27 +28,15 @@
             <button type="button" id="btn-sumar" class="cantidad-btn" onclick="cambiarCantidad(1)">+</button>
         </div>
 
-        <button class="agregar-carrito-btn">Agregar al carrito</button>
+        <form action="{% url 'agregar_al_carrito' componente.id %}" method="post" onsubmit="return actualizarCantidadHidden()">
+            {% csrf_token %}
+            <input type="hidden" name="cantidad" id="cantidad-hidden" value="1">
+            <button class="agregar-carrito-btn" type="submit">Agregar al carrito</button>
+        </form>
     </div>
 </div>
 
-<script>
-    function cambiarCantidad(cambio) {
-        const input = document.getElementById("cantidad");
-        const contenedor = input.closest(".cantidad-control");
-        const stock = parseInt(contenedor.dataset.stock);
-        const btnSumar = document.getElementById("btn-sumar");
-        const btnRestar = document.getElementById("btn-restar");
+<h1>Tambien te puede interesar</h1>
+<div class="carrusel-wrapper" id="carrusel-wrapper"></div>
 
-        let valor = parseInt(input.value) || 1;
-        valor = Math.max(1, Math.min(stock, valor + cambio));
-        input.value = valor;
-
-        btnRestar.disabled = valor <= 1;
-        btnSumar.disabled = valor >= stock;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => cambiarCantidad(0));
-</script>
 {% endblock %}
-

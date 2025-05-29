@@ -1,18 +1,9 @@
-{% extends 'base.html' %}
-
-{% load static %}
-
-{% block title %}Componentes{% endblock %}
-
-{% block head_extra %}
-<link rel="stylesheet" href="{% static 'css/cards.css' %}">
-{% endblock %}
-
-{% block contenido %}
-    <h1>Catálogo de Componentes</h1>
-    <div style="display: flex; flex-wrap: wrap;">
-        {% for componente in componentes %}
-            <div class="card">
+<div class="carousel-wrapper">
+    <button class="carousel-btn prev">&lt;</button>
+    <div class="carousel-container">    
+        <div class="carousel-track">
+            {% for componente in componentes %}
+            <div class="card_carousel">
                 <a href="{% url 'detalle_producto' componente.id %}" class="card-link">
                     <img src="{{ componente.imagen_url }}" alt="{{ componente.modelo }}">
                     <h3>{{ componente.marca }} {{ componente.modelo }}</h3>
@@ -26,6 +17,8 @@
                     </form>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-{% endblock %}
+    <button class="carousel-btn next">&gt;</button>
+</div>

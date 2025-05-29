@@ -22,8 +22,8 @@
 
 .card img {
     width: 100%;
-    height: 150px; /* Misma altura para todas las imágenes */
-    object-fit: contain; /* o cover si prefieres recortar */
+    height: 150px; 
+    object-fit: contain; 
     margin-bottom: 10px;
 }
 
@@ -40,6 +40,13 @@
 .card-link {
     text-decoration: none;
     color: inherit;
+}
+
+.card-footer {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .add-to-cart {

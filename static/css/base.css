@@ -101,7 +101,7 @@ header nav a:hover {
 }
 
 .header-right button {
-    all: unset; /* Borra todos los estilos por defecto */
+    all: unset; 
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -112,7 +112,7 @@ header nav a:hover {
 }
 
 .header-right button:hover {
-    background-color: rgba(0, 0, 0, 0.05); /* efecto de hover suave */
+    background-color: rgba(0, 0, 0, 0.05); 
 }
 
 /* Nav secundario */

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Carrito de Compras{% endblock %}
+
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<script>
+  const CARRUSEL_URL = "{% url 'carrusel_componentes' %}";
+</script>
+<link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+<script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}
+
+{% block contenido %}
+<h1>Tu carrito</h1>
+
+<div class="contenedor-carrito">
+
+    <div class="lista-productos">
+        {% if items %}
+        <div class="carrito-contenedor">
+            {% for item in items %}
+            <div class="carrito-card">
+                <div class="img-container">
+                    <img src="{{ item.producto.imagen_url }}" alt="{{ item.producto.modelo }}" class="carrito-img">
+                </div>
+                <div class="carrito-info">
+                    <h3>{{ item.producto.marca }} {{ item.producto.modelo }}</h3>
+                    <p><strong>Precio unitario:</strong> ${{ item.producto.precio }}</p>
+                    <div class="carrito-cantidad">
+                        <form action="{% url 'disminuir_cantidad' item.producto.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-cantidad">−</button>
+                        </form>
+                        <span class="cantidad-text">{{ item.cantidad }}</span>
+                        <form action="{% url 'agregar_al_carrito' item.producto.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-cantidad">+</button>
+                        </form>
+                    </div>
+                    <p><strong>Subtotal:</strong> ${{ item.subtotal }}</p>
+                    <form action="{% url 'eliminar_del_carrito' item.producto.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-eliminar">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="resumen-carrito">
+        <h3>Resumen del pedido</h3>
+        <p><strong>Artículos:</strong> {{ total_articulos }}</p>
+        <p><strong>Subtotal:</strong> ${{ subtotal }}</p>
+        <p><strong>Envío:</strong> ${{ envio }}</p>
+        <hr>
+        <p><strong>Total:</strong> ${{ total }}</p>
+
+        <form action="{% url 'procesar_pago' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-pagar">Pagar ahora</button>
+        </form>        
+        <form action="{% url 'vaciar_carrito' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-vaciar">Vaciar carrito</button>
+        </form>
+    </div>
+
+</div>
+
+<br><br>
+<h1>Tambien te puede interesar</h1>
+<div class="carrusel-wrapper" id="carrusel-wrapper"></div>
+
+{% else %}
+<p>Tu carrito está vacío.</p>
+{% endif %}
+
+{% endblock %}

@@ -18,7 +18,6 @@ body {
 /* Header */
 header {
     background-color: #1e293b;
-    color: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     display: flex;
@@ -28,7 +27,7 @@ header {
 }
 
 header img{
-    height: 100px;
+    height: 70px;
     width: auto;
     margin-right: 1rem;
     cursor: pointer;
@@ -115,6 +114,24 @@ header nav a:hover {
     background-color: rgba(0, 0, 0, 0.05); 
 }
 
+.user-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;    
+    max-width: 100%;
+}
+
+.user-welcome {
+    color: green;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    text-decoration: none;
+}
+
 /* Nav secundario */
 .secondary-nav {
     background-color: #FFA500;
@@ -129,8 +146,6 @@ header nav a:hover {
     clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
     border-radius: 0 8px 8px 0;
 }
-
-
 
 .nav-button {
     background: #333;

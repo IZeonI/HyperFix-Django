@@ -4,7 +4,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
+from django.utils import timezone
+from django.contrib import messages
 from .models import Componentes
+from clientes.models import Cliente
+from ventas.models import Ticket, TicketComponente
+from empleados.models import Empleados
+from .forms import DatosClienteForm
 
 def registro(request):
     if request.method == 'POST':
@@ -12,10 +18,39 @@ def registro(request):
         if form.is_valid():
             user = form.save()
             login(request, user) 
-            return redirect('lista_componentes')  
+            return redirect('completar_datos_cliente')  
     else:
         form = UserCreationForm()
     return render(request, 'usuarios/registro.html', {'form': form})
+
+@login_required
+def completar_datos_cliente(request):
+    if request.method == 'POST':
+        form = DatosClienteForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
+            correo = form.cleaned_data['correo']
+
+            # Actualizar datos del modelo User
+            user = request.user
+            user.first_name = nombre
+            user.last_name = apellido
+            user.email = correo
+            user.save()
+
+            # Registrar en tabla Cliente
+            Cliente.objects.create(
+                nombre=nombre,
+                apellido=apellido,
+                correo=correo
+            )
+
+            return redirect('lista_componentes') 
+    else:
+        form = DatosClienteForm()
+
+    return render(request, 'usuarios/completar_datos_cliente.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -79,9 +114,56 @@ def perfil_usuario(request):
         'usuario': request.user
     })
 
+@login_required
 def procesar_pago(request):
-    # Lógica de pago o redirección
-    return HttpResponse("Procesando pago...")
+    carrito = request.session.get('carrito', {})
+    if not carrito:
+        messages.error(request, "El carrito está vacío.")
+        return redirect('ver_carrito')
+
+    # Obtener cliente asociado al usuario actual
+    try:
+        cliente = Cliente.objects.get(nombre=request.user.first_name)
+    except Cliente.DoesNotExist:
+        return HttpResponse("Cliente no encontrado. Completa tus datos primero.")
+
+    # Obtener empleado fijo
+    try:
+        empleado = Empleados.objects.get(rfc_empleado='ABCD123456EFG')
+    except Empleados.DoesNotExist:
+        return HttpResponse("Empleado no encontrado.")
+
+    # Calcular total
+    subtotal = 0
+    for producto_id, cantidad in carrito.items():
+        producto = Componentes.objects.get(pk=producto_id)
+        subtotal += producto.precio * cantidad
+    envio = 150
+    total = subtotal + envio
+
+    # Crear ticket
+    ticket = Ticket.objects.create(
+        fecha=timezone.now(),
+        total=total,
+        id_cliente=cliente,
+        rfc_empleado=empleado
+    )
+
+    # Guardar detalles en TicketComponente
+    for producto_id, cantidad in carrito.items():
+        producto = Componentes.objects.get(pk=producto_id)
+        TicketComponente.objects.create(
+            id_ticket=ticket,
+            id_componente=producto,
+            cantidad=cantidad
+        )
+
+    # Limpiar carrito
+    request.session['carrito'] = {}
+
+    messages.success(request, "Pago procesado correctamente. Gracias por su compra.")
+
+    return redirect('ver_carrito')
 
 @login_required(login_url='login')
 def agregar_al_carrito(request, producto_id):

@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Completa tus datos</title>
+  <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+</head>
+<body>
+  <div class="register-container">
+    <h2>Completa tus datos</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+</body>
+</html>

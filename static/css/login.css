@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+.login-container {
+  background-color: #1e293b;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo{
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+form p {
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+.register-link {
+  color: #ffffff;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.register-link a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}

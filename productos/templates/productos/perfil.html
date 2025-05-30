@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Perfil de Usuario{% endblock %}
 
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
 {% block contenido %}
-  <h1>Perfil de {{ usuario.username }}</h1>
-  <p><strong>Email:</strong> {{ usuario.email }}</p>
-  <p><strong>Nombre completo:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</p>
-  <form action="{% url 'logout' %}" method="post" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit">Cerrar sesión</button>
-  </form>
+  <div class="perfil-container">
+    <h1>Perfil de <span class="username">{{ usuario.username }}</span></h1>
+    <div class="perfil-info">
+      <p><strong>Email:</strong> {{ usuario.email }}</p>
+      <p><strong>Nombre completo:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</p>
+    </div>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="logout-btn">Cerrar sesión</button>
+    </form>
+  </div>
 {% endblock %}

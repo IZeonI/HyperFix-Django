@@ -28,6 +28,7 @@ urlpatterns = [
     path('productos/', include('productos.urls'), name='productos'),
     
     path('login/', auth_views.LoginView.as_view(template_name='usuarios/login.html'), name='login'),
+    path('completar-datos/', productos_views.completar_datos_cliente, name='completar_datos_cliente'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('registro/', productos_views.registro, name='registro'),
 ]

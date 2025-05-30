@@ -11,7 +11,9 @@
     <header>
 
         <div class="header-left">
-            <img src="{% static 'images/logo_hf_nobg.png' %}" alt="HyperFix Logo" id="logo">
+            <a href="/productos/componentes/">
+                <img src="{% static 'images/logo_hf_nobg.png' %}" alt="HyperFix Logo" id="logo">
+            </a>
         </div>
 
         <div class="header-center">
@@ -58,48 +60,50 @@
                 </svg>
                 </button>
             </a>
-            
-            {% if user.is_authenticated %}
-            <a href="{% url 'perfil_usuario' %}">
-                <button id="user" style="color: green;">
-                    <!-- SVG ICONO -->
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="green"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        width="24"
-                        height="24"
-                        stroke-width="2"
-                    >
-                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-                        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"/>
-                    </svg>
-                </button>
-            </a>
-            <span style="color: green; font-weight: bold;">Bienvenido, {{ user.username }}</span>
-            {% else %}
-            <a href="{% url 'login' %}">
-                <button id="user">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#fff"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        width="24"
-                        height="24"
-                        stroke-width="2"
-                    >
-                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-                        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"/>
-                    </svg>
-                </button>
-            </a>
-            {% endif %}
+
+            <div class="user-info">
+                {% if user.is_authenticated %}
+                <a href="{% url 'perfil_usuario' %}">
+                    <button id="user" style="color: green;">
+                        <!-- SVG ICONO -->
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="green"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            width="24"
+                            height="24"
+                            stroke-width="2"
+                        >
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"/>
+                        </svg>
+                    </button>
+                </a>
+                <a href="{% url 'perfil_usuario' %}" class="user-welcome">{{ user.username }}</a>
+                {% else %}
+                <a href="{% url 'login' %}">
+                    <button id="user">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            width="24"
+                            height="24"
+                            stroke-width="2"
+                        >
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"/>
+                        </svg>
+                    </button>
+                </a>
+                {% endif %}
+            </div>
         </div>
 
     </header>
